@@ -1,0 +1,3 @@
+var allowedKeys={37:"left",38:"up",39:"right",40:"down",65:"a",66:"b"},konamiCode=["up","up","down","down","left","right","left","right","b","a"],konamiCodePosition=0;document.addEventListener("keydown",function(o){allowedKeys[o.keyCode]==konamiCode[konamiCodePosition]?++konamiCodePosition==konamiCode.length&&(new Audio("egg.ogg").play(),konamiCodePosition=0):konamiCodePosition=0})
+// Konami Code
+//sound and inspiration from love2d.org
