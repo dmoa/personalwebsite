@@ -122,10 +122,14 @@ Other
 .col-sm a {
     text-decoration: underline;
     opacity: 0.8;
-    transition: opacity 0.2s, color 0.5s;
+    transition: opacity 0.3s, color 0.3s;
 }
 
 div a:hover {
     opacity: 1.5;
     color: RoyalBlue;
+}
+
+.row {
+    flex-wrap: nowrap;
 }
