@@ -4,6 +4,15 @@ a:hover {
     color: #000000;
 }
 
+/* disable text select */
+* {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:hover,
@@ -133,49 +142,10 @@ div a:hover {
 .row {
     flex-wrap: nowrap;
 }
-
-
 /* removes glowing border in safari but not chrome */
-
-*, :visited{
-    outline: 0;
-    outline: none;
-    outline-color: transparent;
-    outline-style: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-:hover, :active, :focus{
-    outline: 0;
-    outline: none;
-    outline-color: transparent;
-    outline-style: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-a:visited{
-    outline: 0;
-    outline: none;
-    outline-color: transparent;
-    outline-style: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-a:hover, a:active, a:focus{
-    outline: 0;
-    outline: none;
-    outline-color: transparent;
-    outline-style: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
 
 .btn:focus, .btn:active:focus, .btn.active:focus{
     outline-color: transparent;
     outline-style: none;
-  }
-
-  *{
-    outline-color: transparent;
-    outline-style: none;
-  }
-  *{
-    outline: none;   
-  }
+    box-shadow: none;
+}
