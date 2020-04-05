@@ -13,18 +13,34 @@
 <style>
     .btn {
         text-align: left;
-        color: black;
         text-decoration: none;
     }
+
     li a:hover {
         text-decoration: none;
         transition: 1s;
     }
+
+    .list-group-item {
+        transition: none;
+    }
+
+    .list-group-item a {
+        text-decoration: none;
+    }
+
+    .cover-container {
+        width: 100%;
+    }
+
+    #navbar {
+        max-width: 45em;
+    }
 </style>
 
 <body class="text-center">
-    <div class="cover-container d-flex w-100 h-100 p-2 mx-auto flex-column">
-        <div class="container my-5">
+    <div class="d-flex w-100 h-100 p-2 mx-auto flex-column">
+        <div class="cover-container container my-5" id="navbar">
             <div class="row h4">
                 <div class="col-sm">
                     <a href="index.html">
@@ -44,16 +60,50 @@
             </div>
         </div>
         <p class="display-4">Stan Osipenko's Projects</p>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/astar">A* Pathfinding in Python</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/roguelike">Roguelike Game in C++</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/Spruce">Powerpoint Generator using Text Files</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/tic-tac-toe">Tic Tac Toe in C++</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/ice-drop">BAFTA Young Game Developers Submission</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/traffic-simulation">Visual Traffic Simulation in Lua</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/boats-and-ducks">Brighton Developer Jam Submission</a></li>
-            <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/adventures-of-sheep-mcsheep">Game about Sheep made in One Hour</a></li>
-        </ul>
+        <div class="row mx-auto my-5">
+            <div class="col-sm">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5>Games</h5>
+                    </li>
+                    <li class="list-group-item btn"><a target="_blank"
+                            href="https://github.com/dmoa/roguelike">Roguelike Game in C++</a></li>
+                    <li class="list-group-item btn"><a target="_blank"
+                            href="https://dmoa.itch.io/traffic-simulation">Visual Traffic Simulation in Lua</a></li>
+                    <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/ice-drop">
+                            BAFTA Young Game Developers Submission</a></li>
+                    <li class="list-group-item btn"><a target="_blank"
+                            href="https://dmoa.itch.io/adventures-of-sheep-mcsheep">
+                            Game about Sheep made in One Hour</a></li>
+                    <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/tic-tac-toe">
+                            Tic Tac Toe in C++</a></li>
+                    <li class="list-group-item btn"><a target="_blank"
+                            href="https://dmoa.itch.io/boats-and-ducks">Brighton Developer Jam Submission</a></li>
+                </ul>
+            </div>
+            <div class="col-sm">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5>Software</h5>
+                    </li>
+                    <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/Spruce">
+                            Powerpoint Generator using Text Files</a></li>
+                    <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/astar">A*
+                            Pathfinding in Python</a></li>
+                </ul>
+            </div>
+            <div class="col-sm">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5>Other</h5>
+                    </li>
+                    <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/stan.xyz">This
+                            Website's Source Code</a></li>
+                    <li class="list-group-item btn"><a target="_blank" href="http://expensivecheesegrater.com">Silly
+                            Domain: expensivecheesegrater.com</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
 
