@@ -4,14 +4,12 @@ a:hover {
     color: #000000;
 }
 
-/* disable text select */
-* {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
-}
+.selectable-all {
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
+  }
 
 /* Custom default button */
 .btn-secondary,
