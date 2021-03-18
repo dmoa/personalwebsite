@@ -32,6 +32,11 @@
         transition: 1s;
     }
 
+    #github-link:hover {
+        text-decoration: none;
+        transition: 1s;
+    }
+
     .list-group-item {
         transition: none;
     }
@@ -53,6 +58,17 @@
         display: flex;
         flex-wrap: wrap;
     }
+
+    li a {
+        font-size: 1.2em;
+    }
+
+    /* for descriptions of projects */
+    li div {
+        margin-top: 5px;
+        font-size: 0.7em;
+    }
+
 </style>
 
 
@@ -78,47 +94,50 @@
             </div>
         </div>
         <p class="display-4">Stan Osipenko's Projects</p>
+        <h6>More at <a id="github-link" href="https://github.com/dmoa">github.com/dmoa</a></h6>
         <div class="container-fluid">
             <div class="row mx-auto my-5" id="projects">
                 <div class="col-sm">
                     <ul class="list-group list-group-flush my-5">
                         <li class="list-group-item">
-                            <h5>Games</h5>
+                            <h3>Games</h3>
                         </li>
-                        <li class="list-group-item btn"><a target="_blank"
-                            href="https://github.com/dmoa/Aseprite_Loader">Aseprite_Loader | .ase file Loader outputting frame and pixel data</a></li>
-                        <li class="list-group-item btn"><a target="_blank"
-                            href="https://github.com/dmoa/juice">Topdown Shooter With No Engine in C++</a></li>
-                        <li class="list-group-item btn"><a target="_blank"
-                            href="https://github.com/OrionPl/net-pong">Net-Pong | Multiplayer pong in c++ with custom networking</a></li>
-                        <li class="list-group-item btn"><a target="_blank"
-                                href="https://github.com/dmoa/roguelike">Puzzle Game in C++</a></li>
-                        <li class="list-group-item btn"><a target="_blank"
-                                href="https://dmoa.itch.io/traffic-simulation">Visual Traffic Simulation in Lua</a></li>
-                        <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/ice-drop">
-                                BAFTA Young Game Developers Submission</a></li>
                         <li class="list-group-item btn d-flex justify-content-between align-items-center"><a
-                                target="_blank" href="https://github.com/search?q=user%3Admoa+1hgj">Games Made
-                                in One
+                                target="_blank" href="https://github.com/search?q=user%3Admoa+1hgj">Games Made in One
                                 Hour</a><span class="badge badge-primary badge-pill">34</span></li>
                         <li class="list-group-item btn"><a target="_blank"
-                                href="https://github.com/dmoa/tamagochi-c">Tamagotchi Remake in C</a></li>
+                            href="https://github.com/dmoa/juice">Topdown Shooter <br>
+                            <div> C++ | SDL | Custom Engine</div>
+                        </a></li>
                         <li class="list-group-item btn"><a target="_blank"
-                                href="https://dmoa.itch.io/adventures-of-sheep-mcsheep">
-                                Game About Sheep Made in One Hour</a></li>
-                        <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/tic-tac-toe">
-                                Tic Tac Toe in C++</a></li>
+                            href="https://github.com/OrionPl/net-pong">Net-Pong
+                        <div> Multiplayer pong in C++ with custom networking. Collaborated with Mikołaj, @OrionPl.</div>
+                    </a></li>
                         <li class="list-group-item btn"><a target="_blank"
-                                href="https://dmoa.itch.io/boats-and-ducks">Brighton Developer Jam Submission</a></li>
+                                href="https://github.com/dmoa/roguelike">Puzzle Game
+                                <div>C++ | SFML</div></a></li>
+                        <li class="list-group-item btn"><a target="_blank"
+                                href="https://dmoa.itch.io/traffic-simulation">Visual Traffic Simulation
+                            <div>Lua | LOVE2D</div></a></li>
+                        <li class="list-group-item btn"><a target="_blank" href="https://dmoa.itch.io/ice-drop">
+                                BAFTA Young Game Developers 2020 Submission</a></li>
+                        <li class="list-group-item btn"><a target="_blank"
+                                href="https://github.com/dmoa/tamagochi-c">Tamagotchi Remake
+                            <div>C++ | CLI | ASCII</div></a></li>
+                        <li class="list-group-item btn"><a target="_blank"
+                                href="https://dmoa.itch.io/boats-and-ducks">Brighton Developer Jam 2019 Submission</a></li>
                     </ul>
                 </div>
                 <div class="col-sm">
                     <ul class="list-group list-group-flush my-5">
                         <li class="list-group-item">
-                            <h5>Software</h5>
+                            <h3>Software</h3>
                         </li>
+                        <li class="list-group-item btn"><a target="_blank"
+                            href="https://github.com/dmoa/Aseprite_Loader">Aseprite_Loader
+                        <div>C++ | Outputs pixel, frame, and slice data for Aseprite, a Photoshop alternative. This means that everytime you edit an Aseprite file, you don't need do File->Export->Export-As->... , you can just save it as normal and hotload it.</div></a></li>
                         <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/Spruce">
-                                Powerpoint Generator using Text Files</a></li>
+                                Powerpoint Generator<div>Python | CLI | Generates powerpoints (.pptx) from text files.</div></a></li>
                         <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/astar">A*
                                 Pathfinding in Python</a></li>
                         <li class="list-group-item btn"><a target="_blank"
@@ -133,7 +152,7 @@
                 <div class="col-sm">
                     <ul class="list-group list-group-flush my-5">
                         <li class="list-group-item">
-                            <h5>Other</h5>
+                            <h3>Other</h3>
                         </li>
                         <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/stan.xyz">This
                                 Website's Source Code</a></li>
@@ -143,9 +162,6 @@
                         <li class="list-group-item btn"><a target="_blank"
                                 href="https://github.com/dmoa/crt-shader">Retro Monitor Shader in OpenGL and
                                 Lua</a>
-                        </li>
-                        <li class="list-group-item btn"><a target="_blank" href="https://github.com/dmoa/Shape.lua">Lua
-                                Shape Class for Collision Detection</a>
                         </li>
                     </ul>
                 </div>
