@@ -3,79 +3,88 @@
 
 <head>
     <title>Stan O</title>
-    <link rel="icon" href="pfp.png">
+    <link rel="icon" href="pfp.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/fontawesome.min.css">
-    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <style>
-    #navbar {
-        max-width: 45em;
+
+* {
+    font-family: Verdana, sans-serif;
+    color: black;
+}
+
+body {
+    max-width: 100%;
+    margin: auto;
+    padding-left: 1em;
+}
+
+@media (min-width: 48em) {
+    body {
+        max-width: 50%;
     }
+}
+
+#zdog-canvas {
+    padding-top: 2em;
+    display: flex;
+    margin: 0 auto;
+}
+
+.links {
+    display: inline;
+    /* float: right; */
+    margin-right: 1em;
+}
+
+#name-title {
+    font-size: 4em;
+    margin-top: 0.1em;
+    text-align: center;
+}
+
+#footer-below-name {
+    text-align: center;
+}
+
 </style>
 
-<body class="text-center">
+<body>
 
-    <div class="d-flex w-100 h-100 p-2 mx-auto flex-column">
+    <canvas id="zdog-canvas" width="80" height="80"></canvas>
 
-        <div class="cover-container container my-5" id="navbar">
-            <div class="row h4">
-                <div class="col-sm">
-                    <a href="projects.html">
-                        Projects
-                    </a>
-                </div>
-                <div class="col-sm">
-                    <a href="about.html">
-                        About
-                    </a>
-                </div>
-                <div class="col-sm">
-                    <a href="contact.html">
-                        Contact
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <main role="main" class="inner cover my-auto">
-            <!-- <img src="me.png" class="rounded mx-auto"> -->
-            <p class="cover-heading display-2">Stan Osipenko</p>
-            <h5><strong>Game Programmer</strong> and<strong> Software Engineer.</strong></h6>
-                <p class="lead my-5">
-                    </style>
-                    <a target="_blank" href="github.html" class="btn btn-lg"><i
-                            class="fab fa-github fa-3x"></i><br>Github</a>
-                    <a target="_blank" href="linkedin.html" class="btn btn-lg"><i
-                            class="fab fa-linkedin fa-3x"></i><br>LinkedIn</a>
-                    <a target="_blank" href="https://stan.xyz/resume.pdf" class="btn btn-lg"><i
-                            class="fas fa-clipboard fa-3x"></i><br>Resume</a>
-                </p>
-        </main>
-
-        <canvas id="zdog-canvas" class="mx-auto"></canvas>
-
-        <footer class="mastfoot mx-auto">
-            <div class="">
-                <p>Copyright © 2017-eternity</p>
-            </div>
-        </footer>
-
+    <div id="name-title">
+        Stan Osipenko
     </div>
+    <h4 id="footer-below-name">
+        <li class="links"><a href="https://stan.xyz/resume.pdf" target="_blank" >Resume</a></li>
+        <li class="links"><a href="https://stan.xyz/linkedin" target="_blank" >LinkedIn</a></li>
+        <li class="links"><a href="https://stan.xyz/github" target="_blank" >Github</a></li>
+        <li class="links">me@stan.xyz</li>
+    </h4>
+    <br>
+    <hr>
+
+    This website is getting a makeover. See stan.xyz/projects and stan.xyz/about for old sites.
+
+    <hr>
+    <p>Copyright © 2017-eternity</p>
+
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 <script src="spinny/zdog.dist.min.js"></script>
 <script src="spinny/chroma.min.js"></script>
 <script src="spinny/shapes3dToolbox.min.js"></script>
 <script src="spinny/random.js"></script>
-
 <script src="egg.js"></script>
+
+<script>
+
+// var canvas = document.getElementById("zdog-canvas");
+// canvas.width
+
+</script>
 
 </html>
