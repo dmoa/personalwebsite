@@ -1,0 +1,228 @@
+<!-- made with AI -->
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Fruit Timer</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column; /* stack content vertically */
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .fruit-display {
+      font-size: 8rem;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #777;
+      margin-bottom: 20px;
+      min-height: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .timer-display {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    input[type="number"] {
+      padding: 8px;
+      font-size: 1.2rem;
+      width: 120px;
+      text-align: center;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      background-color: #fff;
+    }
+
+    button {
+      padding: 12px 16px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      background-color: #e6e6e6;
+      color: #333;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background-color: #dcdcdc;
+    }
+
+    #start-pause-timer {
+      background-color: #7ed957;
+      color: white;
+    }
+
+    #start-pause-timer.running {
+      background-color: #f8a261;
+    }
+
+    #reset-timer {
+      background-color: #ff6666;
+      color: white;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .footer {
+      font-size: 0.8rem; /* small writing */
+      color: #aaa; /* subtle text */
+      margin-top: auto; /* push to bottom */
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="fruit-display" id="fruit-display">
+      🍅
+    </div>
+    <div class="tagline" id="tagline">
+      Simple. Solid. Efficient.
+    </div>
+    <div class="timer-display" id="timer-display">
+      25:00
+    </div>
+    <div class="controls">
+      <label for="time-input">Adjust Timer (mins):</label>
+      <input type="number" id="time-input" min="1" max="120" value="25">
+      <button id="start-pause-timer">Start</button>
+      <button id="reset-timer">Reset</button>
+    </div>
+  </div>
+  <div class="footer">
+    SO+LLC
+  </div>
+  <script>
+    const timerDisplay = document.getElementById('timer-display');
+    const fruitDisplay = document.getElementById('fruit-display');
+    const tagline = document.getElementById('tagline'); // tagline element
+    const timeInput = document.getElementById('time-input');
+    const startPauseButton = document.getElementById('start-pause-timer');
+    const resetTimerButton = document.getElementById('reset-timer');
+
+    let timeLeft = 25 * 60; // default: 25 mins
+    let timerInterval = null;
+    let isRunning = false;
+
+    const fruits = [
+      { min: 1, fruit: '🍇', tagline: 'Tiny. Tangy. Gone.' },
+      { min: 5, fruit: '🍒', tagline: 'Bold. Bright. Brief.' },
+      { min: 10, fruit: '🍓', tagline: 'Juicy. Sweet. Seasonal.' },
+      { min: 15, fruit: '🍋', tagline: 'Sharp. Sunny. Necessary.' },
+      { min: 20, fruit: '🍅', tagline: 'Simple. Solid. Efficient.' },
+      { min: 25, fruit: '🍅', tagline: 'Simple. Solid. Efficient.' },
+      { min: 30, fruit: '🍊', tagline: 'Round. Bright. Reliable.' },
+      { min: 40, fruit: '🥝', tagline: 'Soft. Sweet. Fuzzy.' },
+      { min: 50, fruit: '🍎', tagline: 'Crisp. Classic. Familiar.' },
+      { min: 60, fruit: '🍍', tagline: 'Spiky. Sweet. Tropical.' },
+      { min: 70, fruit: '🍈', tagline: 'Big. Mild. Refreshing.' },
+      { min: 90, fruit: '🎃', tagline: 'Bright. Bold. Patient.' },
+      { min: 120, fruit: '🌰', tagline: 'Warm. Nutty. Stubborn.' }
+    ];
+
+    function updateFruit(minutes) {
+      const fruit = fruits.reduce((prev, curr) => (minutes >= curr.min ? curr : prev), fruits[0]);
+      fruitDisplay.textContent = fruit.fruit;
+      tagline.textContent = fruit.tagline; // update tagline
+    }
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function updateDisplay() {
+      timerDisplay.textContent = formatTime(timeLeft);
+      updateFruit(Math.ceil(timeLeft / 60));
+    }
+
+    function toggleStartPause() {
+      if (isRunning) {
+        // Pause timer
+        clearInterval(timerInterval);
+        timerInterval = null;
+        startPauseButton.textContent = 'Resume';
+        startPauseButton.classList.remove('running');
+        isRunning = false;
+      } else {
+        // Start or resume timer
+        timerInterval = setInterval(() => {
+          if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay();
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            startPauseButton.textContent = 'Start';
+            startPauseButton.classList.remove('running');
+            isRunning = false;
+            alert('Time’s up!');
+          }
+        }, 1000);
+        startPauseButton.textContent = 'Pause';
+        startPauseButton.classList.add('running');
+        isRunning = true;
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      isRunning = false;
+      timeLeft = parseInt(timeInput.value, 10) * 60 || 25 * 60;
+      updateDisplay();
+      startPauseButton.textContent = 'Start';
+      startPauseButton.classList.remove('running');
+    }
+
+    timeInput.addEventListener('input', () => {
+      const minutes = parseInt(timeInput.value, 10);
+      if (!isNaN(minutes) && minutes >= 1 && minutes <= 120) {
+        timeLeft = minutes * 60;
+        updateDisplay();
+      }
+    });
+
+    startPauseButton.addEventListener('click', toggleStartPause);
+    resetTimerButton.addEventListener('click', resetTimer);
+
+    updateDisplay();
+  </script>
+</body>
+</html>
