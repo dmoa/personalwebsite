@@ -1,6 +1,6 @@
-<!-- made with AI -->
+<!-- Made with AI -->
 
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,7 @@
       background-color: #f9f9f9;
       color: #333;
       display: flex;
-      flex-direction: column; /* stack content vertically */
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
@@ -48,18 +48,37 @@
     .controls {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
       align-items: center;
     }
 
-    input[type="number"] {
-      padding: 8px;
-      font-size: 1.2rem;
-      width: 120px;
-      text-align: center;
-      border: 2px solid #ddd;
-      border-radius: 12px;
-      background-color: #fff;
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 10px;
+      background: #ddd;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #7ed957;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #7ed957;
+      border-radius: 50%;
+      cursor: pointer;
     }
 
     button {
@@ -98,10 +117,12 @@
     }
 
     .footer {
-      font-size: 0.8rem; /* small writing */
-      color: #aaa; /* subtle text */
-      margin-top: auto; /* push to bottom */
-      padding: 10px;
+      font-size: 0.8rem;
+      color: #aaa;
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
     }
   </style>
@@ -118,8 +139,7 @@
       25:00
     </div>
     <div class="controls">
-      <label for="time-input">Adjust Timer (mins):</label>
-      <input type="number" id="time-input" min="1" max="120" value="25">
+      <input type="range" id="time-slider" min="1" max="120" value="25">
       <button id="start-pause-timer">Start</button>
       <button id="reset-timer">Reset</button>
     </div>
@@ -131,7 +151,7 @@
     const timerDisplay = document.getElementById('timer-display');
     const fruitDisplay = document.getElementById('fruit-display');
     const tagline = document.getElementById('tagline'); // tagline element
-    const timeInput = document.getElementById('time-input');
+    const slider = document.getElementById('time-slider');
     const startPauseButton = document.getElementById('start-pause-timer');
     const resetTimerButton = document.getElementById('reset-timer');
 
@@ -174,14 +194,12 @@
 
     function toggleStartPause() {
       if (isRunning) {
-        // Pause timer
         clearInterval(timerInterval);
         timerInterval = null;
         startPauseButton.textContent = 'Resume';
         startPauseButton.classList.remove('running');
         isRunning = false;
       } else {
-        // Start or resume timer
         timerInterval = setInterval(() => {
           if (timeLeft > 0) {
             timeLeft--;
@@ -205,18 +223,16 @@
       clearInterval(timerInterval);
       timerInterval = null;
       isRunning = false;
-      timeLeft = parseInt(timeInput.value, 10) * 60 || 25 * 60;
+      timeLeft = slider.value * 60 || 25 * 60;
       updateDisplay();
       startPauseButton.textContent = 'Start';
       startPauseButton.classList.remove('running');
     }
 
-    timeInput.addEventListener('input', () => {
-      const minutes = parseInt(timeInput.value, 10);
-      if (!isNaN(minutes) && minutes >= 1 && minutes <= 120) {
-        timeLeft = minutes * 60;
-        updateDisplay();
-      }
+    slider.addEventListener('input', () => {
+      const minutes = parseInt(slider.value, 10);
+      timeLeft = minutes * 60;
+      updateDisplay();
     });
 
     startPauseButton.addEventListener('click', toggleStartPause);
