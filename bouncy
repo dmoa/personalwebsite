@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bouncing Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #ECEFF4; /* Nord snowstorm */
+    }
+    .calculator {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      color: white;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s ease; /* Smooth colour transitions */
+    }
+    .display {
+      font-size: 2rem;
+      padding: 10px;
+      text-align: right;
+      background: #2E3440; /* Nord polar night */
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    button {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4C566A; /* Default Nord grey */
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease; /* Button hover animation */
+    }
+    button:hover {
+      background-color: #D8DEE9; /* Nord snowstorm highlight */
+      color: #2E3440; /* Nord polar night for contrast */
+    }
+    .zero {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Nord Colour Palette
+    const nordPalette = [
+      "#5E81AC", // nord frost blue
+      "#A3BE8C", // nord frost green
+      "#BF616A", // nord red
+      "#EBCB8B", // nord yellow
+      "#D08770", // nord orange
+      "#B48EAD", // nord purple
+      "#88C0D0", // nord frost cyan
+      "#81A1C1"  // nord frost lighter blue
+    ];
+
+    // Utility to get a random colour from the Nord palette
+    const getRandomNordColour = () => nordPalette[Math.floor(Math.random() * nordPalette.length)];
+
+    const Calculator = ({ colour }) => {
+      const [display, setDisplay] = useState("0");
+      const [operand1, setOperand1] = useState(null);
+      const [operator, setOperator] = useState(null);
+      const [waitingForOperand2, setWaitingForOperand2] = useState(false);
+
+      const handleDigitClick = (digit) => {
+        if (waitingForOperand2) {
+          setDisplay(String(digit));
+          setWaitingForOperand2(false);
+        } else {
+          setDisplay(display === "0" ? String(digit) : display + digit);
+        }
+      };
+
+      const handleOperatorClick = (nextOperator) => {
+        const inputValue = parseFloat(display);
+
+        if (operand1 === null) {
+          setOperand1(inputValue);
+        } else if (operator) {
+          const result = calculate(operand1, inputValue, operator);
+          setOperand1(result);
+          setDisplay(String(result));
+        }
+
+        setWaitingForOperand2(true);
+        setOperator(nextOperator);
+      };
+
+      const calculate = (operand1, operand2, operator) => {
+        switch (operator) {
+          case "+":
+            return operand1 + operand2;
+          case "-":
+            return operand1 - operand2;
+          case "*":
+            return operand1 * operand2;
+          case "/":
+            return operand2 !== 0 ? operand1 / operand2 : "Error";
+          default:
+            return operand2;
+        }
+      };
+
+      const handleClear = () => {
+        setDisplay("0");
+        setOperand1(null);
+        setOperator(null);
+        setWaitingForOperand2(false);
+      };
+
+      const handleEqualsClick = () => {
+        if (operator && operand1 !== null) {
+          const result = calculate(operand1, parseFloat(display), operator);
+          setDisplay(String(result));
+          setOperand1(null);
+          setOperator(null);
+          setWaitingForOperand2(false);
+        }
+      };
+
+      const handleDecimalClick = () => {
+        if (!display.includes(".")) {
+          setDisplay(display + ".");
+        }
+      };
+
+      const handleToggleSign = () => {
+        setDisplay(String(parseFloat(display) * -1));
+      };
+
+      const handlePercentage = () => {
+        setDisplay(String(parseFloat(display) / 100));
+      };
+
+      return (
+        <div
+          className="calculator"
+          style={{
+            backgroundColor: colour, // Apply dynamic background colour
+          }}
+        >
+          <div className="display">{display}</div>
+          <div className="buttons">
+            <button onClick={handleClear}>AC</button>
+            <button onClick={handleToggleSign}>+/-</button>
+            <button onClick={handlePercentage}>%</button>
+            <button onClick={() => handleOperatorClick("/")}>÷</button>
+
+            <button onClick={() => handleDigitClick(7)}>7</button>
+            <button onClick={() => handleDigitClick(8)}>8</button>
+            <button onClick={() => handleDigitClick(9)}>9</button>
+            <button onClick={() => handleOperatorClick("*")}>×</button>
+
+            <button onClick={() => handleDigitClick(4)}>4</button>
+            <button onClick={() => handleDigitClick(5)}>5</button>
+            <button onClick={() => handleDigitClick(6)}>6</button>
+            <button onClick={() => handleOperatorClick("-")}>−</button>
+
+            <button onClick={() => handleDigitClick(1)}>1</button>
+            <button onClick={() => handleDigitClick(2)}>2</button>
+            <button onClick={() => handleDigitClick(3)}>3</button>
+            <button onClick={() => handleOperatorClick("+")}>+</button>
+
+            <button className="zero" onClick={() => handleDigitClick(0)}>0</button>
+            <button onClick={handleDecimalClick}>.</button>
+            <button onClick={handleEqualsClick}>=</button>
+          </div>
+        </div>
+      );
+    };
+
+    const BouncingWrapper = ({ children }) => {
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [velocity, setVelocity] = useState({ x: 1, y: 1 }); // Slow speed
+  const [colour, setColour] = useState(getRandomNordColour());
+
+  const containerSize = { width: 360, height: 500 };
+  const speed = 1.5; // constant speed
+
+  const normaliseVelocity = (vx, vy) => {
+    const magnitude = Math.sqrt(vx * vx + vy * vy);
+    return { x: (vx / magnitude) * speed, y: (vy / magnitude) * speed };
+  };
+
+  // utility to get a new random nord colour that's different from the current one
+  const getNewNordColour = (currentColour) => {
+    let newColour;
+    do {
+      newColour = getRandomNordColour();
+    } while (newColour === currentColour); // ensure the colour changes
+    return newColour;
+  };
+
+  useEffect(() => {
+    const move = () => {
+      setPosition((prev) => {
+        let newX = prev.x + velocity.x;
+        let newY = prev.y + velocity.y;
+        let hitWall = false;
+
+        if (newX <= 0 || newX + containerSize.width >= window.innerWidth) {
+          setVelocity((v) => normaliseVelocity(-v.x, v.y));
+          newX = prev.x;
+          hitWall = true;
+        }
+        if (newY <= 0 || newY + containerSize.height >= window.innerHeight) {
+          setVelocity((v) => normaliseVelocity(v.x, -v.y));
+          newY = prev.y;
+          hitWall = true;
+        }
+
+        if (hitWall) {
+          setColour((prevColour) => getNewNordColour(prevColour)); // ensure unique colour
+        }
+
+        return { x: newX, y: newY };
+      });
+    };
+
+    const interval = setInterval(move, 16);
+    return () => clearInterval(interval);
+  }, [velocity]);
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        width: `${containerSize.width}px`,
+        height: `${containerSize.height}px`,
+      }}
+    >
+      {React.cloneElement(children, { colour })} {/* Pass colour to Calculator */}
+    </div>
+  );
+};
+
+    const App = () => (
+      <BouncingWrapper>
+        <Calculator />
+      </BouncingWrapper>
+    );
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</body>
+</html>
