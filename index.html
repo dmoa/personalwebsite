@@ -23,7 +23,7 @@ body {
 
 @media (min-width: 48em) {
     body {
-        max-width: 50%;
+        max-width: 30%;
     }
 }
 
@@ -64,8 +64,62 @@ to do with padding, so better to just wrap it in a div. */
     opacity: 0;
 }
 
+/* Hover image styles - desktop only */
+@media (min-width: 48em) {
+    .hover-container {
+        position: fixed;
+        top: 50%;
+        left: calc(50% + 15% + 2em);
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 1000;
+        max-width: min(450px, 40vw);
+    }
+
+    .hover-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: block;
+    }
+
+    .hover-caption {
+        margin-top: 0.5em;
+        margin-bottom: 0;
+        font-size: 1.1em;
+        text-align: center;
+        color: #666;
+        line-height: 1.3;
+    }
+
+    .asml-item:hover .hover-container,
+    .marathon-item:hover .hover-container,
+    .iwa-item:hover .hover-container {
+        opacity: 1;
+    }
+}
+
+/* Hide hover content on mobile */
+@media (max-width: 47.99em) {
+    .hover-container {
+        display: none;
+    }
+}
+
 li div div {
     float: right;
+}
+
+li {
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+li:hover {
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 </style>
@@ -96,10 +150,23 @@ li div div {
             <div> Carnegie Mellon University - Computer Science B.S <div> 2022 - 2025 </div></div>
         </li>
         <li>
-            <div> Architecture Startup - unannounced <div>2023 - Present</div> </div>
+            <div> Electric Twin - Software Engineer <div>Summer 2025</div> </div>
         </li>
-        <li>
+        <li class="iwa-item">
+            <div> Interiors With Art Ltd - Everything Engineer <div>2023 - Present</div> </div>
+            <div class="hover-container">
+                <img src="images/iwa.jpeg" alt="Interiors With Art 1" class="hover-image">
+                <p class="hover-caption">I love design and do this for fun. Building custom
+                software solutions for interior design: full stack, web scraping, AI,
+                infrastructure—hence "everything engineer."</p>
+            </div>
+        </li>
+        <li class="asml-item">
             <div> ASML - Algorithm Developer <div>Spring+Summer 2024</div> </div>
+            <div class="hover-container">
+                <img src="images/asml.jpg" alt="ASML" class="hover-image">
+                <p class="hover-caption">I lived in the Netherlands for 6 months. Lots of cheese, biking, and coding.</p>
+            </div>
         </li>
         <li>
             <div>Capula Investment Ltd - Intern <div>Summer 2023 </div></div>
@@ -117,8 +184,11 @@ li div div {
         <li>
             <div>Teaching Computer Science 400+ hours <div>2018 - Present</div></div>
         </li>
-        <li>
+        <li class="marathon-item">
             <div>Ran Amsterdam Marathon with no training<div>May 2024</div></div>
+            <div class="hover-container">
+                <img src="images/marathon.jpeg" alt="Amsterdam Marathon" class="hover-image">
+            </div>
         </li>
         <li>
             <div><a href="https://dmoa.itch.io/island-citadel" target="_blank">Island Citadel</a> - Published videogame <div>2020 - 2024 </div> </div>
